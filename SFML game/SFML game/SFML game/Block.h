@@ -5,25 +5,49 @@
 
 class Block
 {
-private:
+protected:
 
 	sf::Sprite sprite;
 	sf::Texture texture;
+	std::pair<int, int> pair;
 
 	int health;
 
-
-	void initSprite();
-	void initTexture();
+	virtual void initSprite() = 0;
+	virtual void initTexture() = 0;
 public:
-	Block();
-	virtual ~Block();
 
-	std::vector<float> getSpritePosition();
-	bool update();
-	void updateHit();
-	void render(sf::RenderTarget* target);
+	virtual std::vector<float> getSpritePosition();
+	virtual bool update();
+	virtual void updateHit();
+	virtual void render(sf::RenderTarget* target);
 
 	friend class CollisionManager;
 };
+
+class BlockYellow :public Block
+{
+private:
+	void initTexture();
+	void initSprite();
+	static int counter;
+public:
+	BlockYellow();
+	~BlockYellow();
+
+};
+
+
+class BlockBlue :public Block
+{
+private:
+	void initTexture();
+	void initSprite();
+	static int counter;
+public:
+	BlockBlue();
+	~BlockBlue() { counter--; };
+
+};
+
 

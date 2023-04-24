@@ -14,9 +14,12 @@ void Game::initWindow()
 
 void Game::initBlocks()
 {
-
-	this->block.push_back(new Block());
-	collision.registerObject(this->block.back());
+	for (int i=0;i<2;i++)
+	{
+		this->block.push_back(new BlockYellow);
+		this->block.push_back(new BlockBlue);
+		//collision.registerObject(this->block.back());
+	}
 }
 
 void Game::initPlayer()
@@ -32,8 +35,8 @@ void Game::initBall()
 
 void Game::initBackground()
 {
-	std::shared_ptr<Block> background = std::make_shared<Block>();
-	collision.setBackground(background);
+	//std::shared_ptr<Block> background = std::make_shared<Block>();
+	//collision.setBackground(background);
 }
 
 
@@ -116,11 +119,12 @@ void Game::updateBlock()
 
 void Game::collisionManager()
 {
-	for (auto* block : block)
-		if (this->collision.handleCollisions())
+	int counter = 0;
+	for (int i=0;i<block.size();i++)
+		if (this->collision.handleCollisions(block.at(i)))
 		{
-			block->updateHit();
-			ball->updateDirection(block->getSpritePosition());
+			block.at(i)->updateHit();
+			ball->updateDirection(block.at(i)->getSpritePosition());
 		}
 
 }

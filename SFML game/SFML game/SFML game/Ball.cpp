@@ -58,3 +58,7 @@ void Ball::update()
 	this->sprite.move(direction.x * this->speed, direction.y * this->speed);
 
 }
+
+
+
+

@@ -21,7 +21,7 @@ public:
     void registerObject(Ball* object);
     void registerObject(Block* object);
 
-    bool handleCollisions();
+    bool handleCollisions(Block* object);
 
 
 
