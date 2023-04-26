@@ -1,22 +1,2 @@
-﻿  Block.cpp
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Block.cpp(68,43): warning C4244: "argument": konwersja z "_Ty2" do "float", możliwa utrata danych
-          with
-          [
-              _Ty2=int
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Block.cpp(68,31): warning C4244: "argument": konwersja z "_Ty1" do "float", możliwa utrata danych
-          with
-          [
-              _Ty1=int
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Block.cpp(95,43): warning C4244: "argument": konwersja z "_Ty2" do "float", możliwa utrata danych
-          with
-          [
-              _Ty2=int
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Block.cpp(95,31): warning C4244: "argument": konwersja z "_Ty1" do "float", możliwa utrata danych
-          with
-          [
-              _Ty1=int
-          ]
+﻿  Game.cpp
   SFML game.vcxproj -> C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe

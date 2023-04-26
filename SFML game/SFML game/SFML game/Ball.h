@@ -19,10 +19,12 @@ public:
 	Ball(sf::VideoMode videoMode);
 	~Ball();
 
+	sf::Sprite getSprite() { return this->sprite; };
+	void setPosition(int x, int y);
 	void directions(int x, int y);
-	void updateDirection(std::vector<float> spritePos);
+	void updateDirection( bool& changeX, bool& changeY);
 	void render(sf::RenderTarget* target);
-	void update();
-	friend class CollisionManager;
+	void update(float& dt);
+
 };
 

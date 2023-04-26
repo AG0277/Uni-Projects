@@ -21,8 +21,20 @@ public:
 	virtual bool update();
 	virtual void updateHit();
 	virtual void render(sf::RenderTarget* target);
+	virtual sf::Sprite getSprite() { return this->sprite; };
 
-	friend class CollisionManager;
+};
+
+class BlockBackground :public Block
+{
+private:
+	void initTexture();
+	void initSprite();
+	static int counter;
+public:
+	BlockBackground() ;
+	~BlockBackground() {};
+
 };
 
 class BlockYellow :public Block
@@ -33,7 +45,7 @@ private:
 	static int counter;
 public:
 	BlockYellow();
-	~BlockYellow();
+	~BlockYellow() { counter--; };
 
 };
 

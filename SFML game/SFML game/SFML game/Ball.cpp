@@ -17,11 +17,16 @@ Ball::Ball(sf::VideoMode videoMode)
 	initTexture();
 	initSprite();
 	this->sprite.setPosition(videoMode.width / 2 - videoMode.width * 0.05, videoMode.height * 0.75);
-	this->speed = 1;
+	this->speed = 300;
 }
 
 Ball::~Ball()
 {
+}
+
+void Ball::setPosition(int x, int y)
+{
+	this->sprite.setPosition(x,y);
 }
 
 void Ball::directions(int x, int y)
@@ -33,18 +38,12 @@ void Ball::directions(int x, int y)
 
 }
 
-void Ball::updateDirection(std::vector<float> spritePos)
+void Ball::updateDirection( bool& changeX, bool& changeY)
 {
-	if (sprite.getPosition().y <spritePos.at(1) + spritePos.at(3) && sprite.getPosition().y  > spritePos.at(1))
+	if (changeX == true)
 		direction.x = -direction.x;
-	else if (sprite.getPosition().x < spritePos.at(0) + spritePos.at(2) && sprite.getPosition().x  >spritePos.at(0))
+	if (changeY == true)
 		direction.y = -direction.y;
-	else
-	{
-		direction.x = -direction.x;
-		direction.y = -direction.y;
-	}
-
 }
 
 void Ball::render(sf::RenderTarget* target)
@@ -52,10 +51,10 @@ void Ball::render(sf::RenderTarget* target)
 	target->draw(this->sprite);
 }
 
-void Ball::update()
+void Ball::update(float& dt)
 {
 
-	this->sprite.move(direction.x * this->speed, direction.y * this->speed);
+	this->sprite.move(direction.x * this->speed*dt, direction.y * this->speed*dt);
 
 }
 

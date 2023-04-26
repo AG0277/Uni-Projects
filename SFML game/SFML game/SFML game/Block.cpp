@@ -36,10 +36,32 @@ bool Block::update()
 
 void Block::render(sf::RenderTarget* target)
 {
-	this->sprite.setColor(sf::Color::Red);
 	target->draw(this->sprite);
 }
+/////////////////////////////////////////////////////////////////
+// Block Background
 
+void BlockBackground::initTexture()
+{
+	if (!this->texture.loadFromFile("Textures/background.png"))
+		std::cout << "ERROR::FAILED TO LOAD TEXTURE BLOCK\n";
+}
+void BlockBackground::initSprite()
+{
+	this->sprite.setTexture(this->texture);
+	sprite.scale(1.2f, 1.2f);
+	//sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
+}
+
+BlockBackground::BlockBackground()
+{
+
+	initTexture();
+	initSprite();
+	this->sprite.setPosition(pair.first, pair.second);
+	this->health = 3;
+
+}
 
 /////////////////////////////////////////////////////////////////
 // Block Yellow
@@ -80,7 +102,7 @@ void BlockBlue::initSprite()
 {
 	this->sprite.setTexture(this->texture);
 	sprite.scale(0.3f, 0.3f);
-	this->sprite.setColor(sf::Color::Green);
+	this->sprite.setColor(sf::Color::Blue);
 	//sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
 }
 

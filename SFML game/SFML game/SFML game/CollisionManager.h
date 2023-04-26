@@ -8,21 +8,8 @@
 class Block;
 class Ball;
 class CollisionManager {
-private:
-    std::vector<Ball*> objectBall;
-    std::vector<Block*> objectBlock;
-    std::shared_ptr<Block> background;
 
 public:
-    CollisionManager() {};
-    ~CollisionManager();
-
-    void setBackground(std::shared_ptr<Block> background);
-    void registerObject(Ball* object);
-    void registerObject(Block* object);
-
-    bool handleCollisions(Block* object);
-
-
-
+    bool handleCollisions(Ball& ball, Block& block, bool& changeX, bool& changeY);
+    bool handleBackgroundCollisions(Ball& ball, sf::Sprite& worldbackground, bool& changeX, bool& changeY);
 }; 

@@ -8,6 +8,7 @@ int main()
 
     while (game.running())
     {
+        game.updateDeltaTime();
         game.update();
         game.render();
     }

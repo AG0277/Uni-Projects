@@ -8,17 +8,23 @@ void Game::initVariables()
 
 void Game::initWindow()
 {
-	this->videoMode = sf::VideoMode(900, 450);
+	this->videoMode = sf::VideoMode(590, 900);
 	this->window = new sf::RenderWindow(videoMode, "Bricks Breaker", sf::Style::Titlebar | sf::Style::Close);
+	this->window->setFramerateLimit(60);
 }
 
 void Game::initBlocks()
 {
-	for (int i=0;i<2;i++)
+	for (int i = 0; i < 4; i++)
 	{
-		this->block.push_back(new BlockYellow);
-		this->block.push_back(new BlockBlue);
-		//collision.registerObject(this->block.back());
+		if (i % 2 == 0)
+		{
+			this->block.push_back(new BlockYellow);
+		}
+		else
+		{
+			this->block.push_back(new BlockBlue);
+		}
 	}
 }
 
@@ -29,14 +35,16 @@ void Game::initPlayer()
 
 void Game::initBall()
 {
-	this->ball = new Ball(videoMode);
-	collision.registerObject(this->ball);
+	this->ball.push_back( new Ball(videoMode));
 }
 
 void Game::initBackground()
 {
-	//std::shared_ptr<Block> background = std::make_shared<Block>();
-	//collision.setBackground(background);
+	//this->background = new BlockBackground;
+	if (!this->worldBackgroundTexture.loadFromFile("Textures/background.png"))
+		std::cout << "ERROR::FAILED TO LOAD TEXTURE BLOCK\n"; 
+	this->worldBackgroud.setTexture(worldBackgroundTexture);
+	this->worldBackgroud.scale(1.2f, 1.2f);
 }
 
 
@@ -49,6 +57,7 @@ Game::Game()
 	initVariables();
 	initPlayer();
 	initBall();
+	initBackground();
 	initBlocks();
 
 }
@@ -57,9 +66,11 @@ Game::~Game()
 {
 	delete this->window;
 	delete this->player;
-	delete this->ball;
+	for (auto* ball : ball)
+		delete ball;
 	for (auto* block : block)
 		delete block;
+	delete this->background;
 }
 
 
@@ -67,6 +78,11 @@ Game::~Game()
 // functions
 
 
+
+void Game::updateDeltaTime()
+{
+	this->deltaTime = this->dtClock.restart().asSeconds();
+}
 
 const bool Game::running() const
 {
@@ -84,8 +100,11 @@ void Game::pollEvents()
 			this->window->close();
 		if (sfmlEvent.type == sf::Event::MouseButtonReleased)
 		{
-			sf::Vector2i position = sf::Mouse::getPosition(*this->window);
-			this->ball->directions(position.x, position.y);
+			for (int i = 0; i < ball.size(); i++)
+			{
+				sf::Vector2i position = sf::Mouse::getPosition(*this->window);
+				this->ball.at(i)->directions(position.x, position.y);
+			}
 		}
 	}
 }
@@ -102,7 +121,8 @@ void Game::updatePlayerPosition()
 
 void Game::updateBallPosition()
 {
-	this->ball->update();
+	for (auto* ball : ball)
+		ball->update(deltaTime);
 }
 
 void Game::updateBlock()
@@ -120,12 +140,30 @@ void Game::updateBlock()
 void Game::collisionManager()
 {
 	int counter = 0;
-	for (int i=0;i<block.size();i++)
-		if (this->collision.handleCollisions(block.at(i)))
+
+	for (int i = 0; i < ball.size(); i++)
+	{
+
+		for (int j = 0; j < block.size(); j++)
 		{
-			block.at(i)->updateHit();
-			ball->updateDirection(block.at(i)->getSpritePosition());
+			bool changeX = false;
+			bool changeY = false;
+
+			if (this->collision.handleCollisions(*ball.at(i), *block.at(j), changeX, changeY))
+			{
+				ball.at(i)->updateDirection(changeX, changeY);
+				block.at(j)->updateHit();
+			}
 		}
+		bool changeX = false;
+		bool changeY = false;
+		if (this->collision.handleBackgroundCollisions(*ball.at(i), worldBackgroud, changeX, changeY))
+		{
+			ball.at(i)->updateDirection( changeX,changeY);
+		
+		}
+		
+	}
 
 }
 
@@ -147,8 +185,10 @@ void Game::render()
 {
 	this->window->clear();
 
+	window->draw(this->worldBackgroud);
 	this->player->render(this->window);
-	this->ball->render(this->window);
+	for (auto* ball : ball)
+		ball->render(this->window);
 	for (auto* block : block)
 		block->render(this->window);
 
