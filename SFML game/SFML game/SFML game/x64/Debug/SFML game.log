@@ -1,2 +1,30 @@
-﻿  Game.cpp
+﻿  CollisionManager.cpp
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(45,97): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(45,56): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(54,138): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(54,56): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(65,150): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(65,106): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(73,111): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(73,65): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
+  Game.cpp
+  Generowanie kodu...
+  LINK : nie znaleziono elementu C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe ani nie został on skompilowany podczas ostatniego konsolidowania przyrostowego; zostanie wykonana pełna konsolidacja
+main.obj : warning LNK4099: nie znaleziono pliku PDB „vc143.pdb” z elementem „main.obj” lub w pozycji „C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\vc143.pdb”; obiekt zostanie skonsolidowany bez informacji debugowania
   SFML game.vcxproj -> C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe
