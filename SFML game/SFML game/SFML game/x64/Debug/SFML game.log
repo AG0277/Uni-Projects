@@ -1,30 +1,17 @@
-﻿  CollisionManager.cpp
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(45,97): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(45,56): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
+﻿  Ball.cpp
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(7,90): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
           with
           [
-              T=float
+              T=unsigned int
           ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(54,138): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(54,56): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(7,52): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
           with
           [
-              T=float
+              T=unsigned int
           ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(65,150): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(65,106): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(73,111): warning C4244: "argument": konwersja z "const T" do "int", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\CollisionManager.cpp(73,65): warning C4244: "argument": konwersja z "double" do "int", możliwa utrata danych
-  Game.cpp
-  Generowanie kodu...
-  LINK : nie znaleziono elementu C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe ani nie został on skompilowany podczas ostatniego konsolidowania przyrostowego; zostanie wykonana pełna konsolidacja
-main.obj : warning LNK4099: nie znaleziono pliku PDB „vc143.pdb” z elementem „main.obj” lub w pozycji „C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\vc143.pdb”; obiekt zostanie skonsolidowany bez informacji debugowania
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(19,90): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(19,47): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(20,31): warning C4244: "=": konwersja z "unsigned int" do "float", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(29,29): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(29,27): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
   SFML game.vcxproj -> C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe

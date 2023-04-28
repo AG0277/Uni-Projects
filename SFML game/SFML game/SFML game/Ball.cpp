@@ -17,7 +17,7 @@ Ball::Ball(sf::VideoMode videoMode)
 	initTexture();
 	initSprite();
 	this->sprite.setPosition(videoMode.width / 2 - videoMode.width * 0.05, videoMode.height * 0.75);
-	this->speed = 300;
+	this->speed = videoMode.width/100;
 }
 
 Ball::~Ball()
@@ -51,7 +51,7 @@ void Ball::render(sf::RenderTarget* target)
 	target->draw(this->sprite);
 }
 
-void Ball::update(float& dt)
+void Ball::update(const float& dt)
 {
 
 	this->sprite.move(direction.x * this->speed*dt, direction.y * this->speed*dt);

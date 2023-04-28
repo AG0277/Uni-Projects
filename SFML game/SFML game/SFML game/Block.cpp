@@ -74,7 +74,7 @@ void BlockYellow::initTexture()
 void BlockYellow::initSprite()
 {
 	this->sprite.setTexture(this->texture);
-	sprite.scale(0.3f, 0.3f);
+	sprite.scale(0.4f, 0.4f);
 	this->sprite.setColor(sf::Color::Yellow);
 	//sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
 }
@@ -101,7 +101,7 @@ void BlockBlue::initTexture()
 void BlockBlue::initSprite()
 {
 	this->sprite.setTexture(this->texture);
-	sprite.scale(0.3f, 0.3f);
+	sprite.scale(0.4f, 0.4f);
 	this->sprite.setColor(sf::Color::Blue);
 	//sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
 }

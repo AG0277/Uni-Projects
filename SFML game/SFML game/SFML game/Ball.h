@@ -9,7 +9,6 @@ class Ball
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
-
 	float speed;
 	sf::Vector2f direction;
 
@@ -24,7 +23,7 @@ public:
 	void directions(int x, int y);
 	void updateDirection( bool& changeX, bool& changeY);
 	void render(sf::RenderTarget* target);
-	void update(float& dt);
+	void update(const float& dt);
 
 };
 
