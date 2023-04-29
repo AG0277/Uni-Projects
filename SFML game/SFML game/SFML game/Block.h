@@ -21,7 +21,7 @@ public:
 	virtual bool update();
 	virtual void updateHit();
 	virtual void render(sf::RenderTarget* target);
-	virtual sf::Sprite getSprite() { return this->sprite; };
+	virtual sf::Sprite* getSprite() { return &(this->sprite); };
 
 };
 

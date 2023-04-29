@@ -12,11 +12,12 @@ void Ball::initTexture()
 		std::cout << "ERROR::FAILED TO LOAD TEXTURE BALL\n";
 }
 
-Ball::Ball(sf::VideoMode videoMode)
+Ball::Ball(sf::VideoMode videoMode, sf::Sprite& background)
 {
 	initTexture();
 	initSprite();
-	this->sprite.setPosition(videoMode.width / 2 - videoMode.width * 0.05, videoMode.height * 0.75);
+
+	this->sprite.setPosition(background.getGlobalBounds().width / 2 , background.getGlobalBounds().height*0.98);
 	this->speed = videoMode.width/100;
 }
 

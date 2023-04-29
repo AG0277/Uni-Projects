@@ -13,7 +13,8 @@ void Game::initWindow()
 
 void Game::initStates()
 {
-	this->states.push(new GameState(this->window,this->videoMode));
+	this->states.push(new GameState(this->window, this->videoMode));
+	//this->states.push(new MainMenu(this->window, this->videoMode));
 }
 
 
@@ -40,7 +41,7 @@ Game::~Game()
 void Game::updateDeltaTime()
 {
 	this->deltaTime = 1;//= this->dtClock.restart().asSeconds();
-	std::cout << deltaTime << std::endl;
+	//std::cout << dtClock.restart().asSeconds() << std::endl;
 }
 
 const bool Game::running() const
@@ -59,7 +60,6 @@ void Game::pollEvents()
 			this->window->close();
 	}
 }
-
 
 void Game::update()
 {
@@ -81,6 +81,5 @@ void Game::render()
 	this->window->clear();
 	if (!this->states.empty())
 		this->states.top()->render(this->window);
-
 	this->window->display();
 }

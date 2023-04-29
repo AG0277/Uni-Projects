@@ -2,12 +2,17 @@
 
 States::States(sf::RenderWindow* window, sf::VideoMode videoMode)
 {
-	this -> window = window;
+	this->window = window;
 	this->videoMode = videoMode;
-	this->quit = false;
+	this->quitState = false;
 }
 
-const bool& States::getQuit() const
+States::~States()
 {
-	return this->quit;
+	
+}
+
+ bool States::getQuit() 
+{
+	return this->quitState;
 }

@@ -7,15 +7,11 @@ private:
 	Player* player;
 	std::vector<Block*> block;
 	std::vector<Ball*> ball;
-	CollisionManager collision;
-	BlockBackground* background;
 	static int ballsCounter;
 	sf::Vector2i Ballposition;
 	static float dt;
-
-	// Game map
-	sf::Texture worldBackgroundTexture;
-	sf::Sprite worldBackgroud;
+	bool play;
+	bool canModify;
 
 	// private initlializers
 	void initBlocks();
@@ -29,6 +25,7 @@ public:
 
 	void fireBalls(sf::Vector2i position);
 	// update functions
+	void GameBoard();
 	void endState();
 	void collisionManager();
 	void updateKeybind() ;

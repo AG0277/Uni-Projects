@@ -7,7 +7,7 @@ bool CollisionManager::handleCollisions(Ball& ball, Block& block, bool& changeX,
     bool checkX = false;
     bool checkY = false;
     float radius = ball.getSprite().getGlobalBounds().width / 2;
-    if (block.getSprite().getGlobalBounds().intersects(ball.getSprite().getGlobalBounds()))
+    if (block.getSprite()->getGlobalBounds().intersects(ball.getSprite().getGlobalBounds()))
     {
         int y, y1, y2, y3, y4;
         y = ball.getSprite().getPosition().y + radius;
@@ -42,7 +42,7 @@ bool CollisionManager::handleCollisions(Ball& ball, Block& block, bool& changeX,
     return false;
 }
 
-bool CollisionManager::handleBackgroundCollisions(Ball& ball, sf::Sprite& worldbackground, bool& changeX, bool& changeY)
+bool CollisionManager::handleBackgroundCollisions(Ball& ball, sf::Sprite& worldbackground, bool& changeX, bool& changeY,bool& delBall)
 {
     bool checkX = false;
     bool checkY = false;
@@ -58,11 +58,11 @@ bool CollisionManager::handleBackgroundCollisions(Ball& ball, sf::Sprite& worldb
     }
     else if(ball.getSprite().getPosition().y + radius >= worldbackground.getGlobalBounds().top + worldbackground.getGlobalBounds().height)
     {
-        changeY = true;
+       // changeY = true;
         checkY = true;
-        ball.setPosition(ball.getSprite().getPosition().x, worldbackground.getGlobalBounds().top+worldbackground.getGlobalBounds().height- radius * 1.4);
+        //ball.setPosition(ball.getSprite().getPosition().x, worldbackground.getGlobalBounds().top+worldbackground.getGlobalBounds().height- radius * 1.4);
+        delBall = true;
 
-        //return true;
 
     }
 
