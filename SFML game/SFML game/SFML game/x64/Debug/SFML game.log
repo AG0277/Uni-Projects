@@ -1,16 +1,2 @@
-﻿  Ball.cpp
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(7,90): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(7,52): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(20,103): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(21,31): warning C4244: "=": konwersja z "unsigned int" do "float", możliwa utrata danych
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(30,29): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Ball.cpp(30,27): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+﻿  MainMenu.cpp
   SFML game.vcxproj -> C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe

@@ -13,8 +13,9 @@ void Game::initWindow()
 
 void Game::initStates()
 {
-	this->states.push(new GameState(this->window, this->videoMode));
-	//this->states.push(new MainMenu(this->window, this->videoMode));
+
+	this->states.push(new MainMenu(this->window, this->videoMode, &this->states));
+
 }
 
 
@@ -40,7 +41,8 @@ Game::~Game()
 
 void Game::updateDeltaTime()
 {
-	this->deltaTime = 1;//= this->dtClock.restart().asSeconds();
+	this->deltaTime = 1;
+	//this->deltaTime = this->dtClock.getElapsedTime().asSeconds();
 	//std::cout << dtClock.restart().asSeconds() << std::endl;
 }
 
@@ -54,30 +56,37 @@ void Game::pollEvents()
 
 	while (this->window->pollEvent(sfmlEvent))
 	{
+
 		if (sfmlEvent.type == sf::Event::Closed)
 			this->window->close();
 		if (sfmlEvent.type == sf::Event::KeyPressed && sfmlEvent.key.code == sf::Keyboard::Escape)
 			this->window->close();
+		//if (sfmlEvent.type == sf::Event::KeyPressed && sfmlEvent.key.code == sf::Keyboard::Enter)
+		//	this->states.push(new GameState(this->window, this->videoMode, &this->states));
 	}
 }
 
 void Game::update()
 {
 	this->pollEvents();
-	if (!this->states.empty())
-	{
-		this->states.top()->update(this->deltaTime);
-		if (this->states.top()->getQuit())
+	//if (this->window->hasFocus()) {
+		if (!this->states.empty())
 		{
-			this->states.top()->endState();
-			delete this->states.top();
-			this->states.pop();
+			this->states.top()->update(this->deltaTime);
+			if (this->states.top()->getQuit())
+			{
+				this->states.top()->endState();
+				delete this->states.top();
+				this->states.pop();
+			}
 		}
-	}
+
+	
 }
 
 void Game::render()
 {
+
 	this->window->clear();
 	if (!this->states.empty())
 		this->states.top()->render(this->window);

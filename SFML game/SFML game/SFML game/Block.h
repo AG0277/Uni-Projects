@@ -16,7 +16,7 @@ protected:
 	virtual void initSprite() = 0;
 	virtual void initTexture() = 0;
 public:
-
+	virtual ~Block() { };
 	virtual std::vector<float> getSpritePosition();
 	virtual bool update();
 	virtual void updateHit();
@@ -25,17 +25,7 @@ public:
 
 };
 
-class BlockBackground :public Block
-{
-private:
-	void initTexture();
-	void initSprite();
-	static int counter;
-public:
-	BlockBackground() ;
-	~BlockBackground() {};
 
-};
 
 class BlockYellow :public Block
 {

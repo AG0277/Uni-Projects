@@ -1,7 +1,7 @@
 #include "GameState.h"
 
-int GameState::ballsCounter = 0;
-float GameState::dt = 0;
+//int GameState::ballsCounter = 0;
+//float GameState::dt = 0;
 
 void GameState::initBlocks()
 {
@@ -9,10 +9,12 @@ void GameState::initBlocks()
 	{
 		if (i % 2 == 0)
 		{
+			int k = 0;
 			this->block.push_back(new BlockYellow);
 		}
 		else
 		{
+			int k = 0;
 			this->block.push_back(new BlockBlue);
 		}
 	}
@@ -24,7 +26,7 @@ void GameState::initPlayer()
 }
 
 void GameState::initBall()
-{
+{	
 	this->ball.push_back(new Ball(videoMode,worldBackgroud));
 	ballsCounter++;
 }
@@ -38,15 +40,14 @@ void GameState::initBackground()
 	this->worldBackgroud.scale(1.2f, 1.2f);
 }
 
-
-GameState::GameState(sf::RenderWindow* window, sf::VideoMode videoMode)
-	:States(window,videoMode)
+GameState::GameState(sf::RenderWindow* window, sf::VideoMode videoMode,std::stack<States*>* states)
+	:States(window,videoMode,states)
 {
+	initBlocks();
 	collision = CollisionManager();
 	initBackground();
 	initPlayer();
 	initBall();
-	initBlocks();
 	play = true;
 	canModify = true;
 
@@ -69,7 +70,7 @@ void GameState::fireBalls(sf::Vector2i position)
 		this->ball.at(ballsCounter-1)->directions(position.x, position.y);
 }
 
-void GameState::GameBoard()
+void GameState::changeGameBoard()
 {
 
 	if (this->ballsCounter <= 0 && play == false)
@@ -79,11 +80,6 @@ void GameState::GameBoard()
 			block->getSprite()->setPosition(block->getSprite()->getGlobalBounds().left, block->getSprite()->getGlobalBounds().top + block->getSprite()->getGlobalBounds().height);
 		}
 	}
-
-}
-
-void GameState::endState()
-{
 
 }
 
@@ -103,6 +99,8 @@ void GameState::updateKeybind()
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->play == true)
 	{
 		Ballposition = sf::Mouse::getPosition(*this->window);
+		ball.erase(ball.begin());
+		ballsCounter--;
 		fireBalls(Ballposition);
 		this->play = false;
 	}
@@ -141,18 +139,18 @@ void GameState::updateFiredBalls(const float& deltaTime)
 	this->dt = (dt+temp) ;
 	if (dt > 100)
 	{
-		if (ballsCounter-1 > 0 && ballsCounter < 30 && canModify == true)
+		if (ballsCounter > 0 && ballsCounter < 30 && canModify == true&&play == false)
 		{
 			if (ballsCounter == 29)
 				canModify = false;
 			fireBalls(Ballposition);
-			dt = 0;
 		}
+		dt = 0;
 	}
 	
 }
 
-void GameState::collisionManager()
+void GameState::collisionManager(const float& deltaTime)
 {
 	int counter = 0;
 
@@ -173,7 +171,7 @@ void GameState::collisionManager()
 		bool changeX = false;
 		bool changeY = false;
 		bool delBall = false;
-		if (this->collision.handleBackgroundCollisions(*ball, worldBackgroud, changeX, changeY, delBall))
+		if (this->collision.handleBackground_BallCollisions(*ball, worldBackgroud, changeX, changeY, delBall))
 		{
 			ball->updateDirection(changeX, changeY);
 			if (delBall == true)
@@ -182,7 +180,7 @@ void GameState::collisionManager()
 				ballsCounter--;
 				if (this->ball.size() == 0)
 				{ 
-					GameBoard();
+					changeGameBoard();
 					play = true;
 					this->ball.push_back(new Ball(videoMode,worldBackgroud));
 					ballsCounter++;
@@ -193,13 +191,26 @@ void GameState::collisionManager()
 		++counter;
 	}
 
+	if (block.size() <= 0)
+		std::cout << "asd";
+
+	for (auto block : block)
+	{
+		if (collision.handleBackground_BlockCollisions(*block, worldBackgroud))
+		{
+
+			this->endState();
+			//std::cout <<deltaTime<< " XDDDDDDDDDDDDDDDDD";
+			//this->states->push(new MainMenu(this->window, this->videoMode, this->states));
+		}
+	}
 }
 
 void GameState::update(const float& deltaTime)
 {
-	this->collisionManager();
-	this->player->update();
 	this->updateBlock();
+	this->collisionManager(deltaTime);
+	this->player->update();
 	this->updateKeybind();
 	this->updatePlayerPosition();
 	this->updateBallPosition(deltaTime);

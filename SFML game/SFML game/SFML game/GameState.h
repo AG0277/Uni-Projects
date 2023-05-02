@@ -1,5 +1,6 @@
 #pragma once
 #include"States.h"
+#include "MainMenu.h"
 class GameState :public States
 {
 private:
@@ -7,9 +8,9 @@ private:
 	Player* player;
 	std::vector<Block*> block;
 	std::vector<Ball*> ball;
-	static int ballsCounter;
+	 int ballsCounter;
 	sf::Vector2i Ballposition;
-	static float dt;
+	 float dt;
 	bool play;
 	bool canModify;
 
@@ -20,14 +21,13 @@ private:
 	void initBackground();
 
 public:
-	GameState(sf::RenderWindow* window, sf::VideoMode videoMode) ;
-	~GameState() ;
+	GameState(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states) ;
+	virtual ~GameState() ;
 
 	void fireBalls(sf::Vector2i position);
 	// update functions
-	void GameBoard();
-	void endState();
-	void collisionManager();
+	void changeGameBoard();
+	void collisionManager(const float& deltaTime);
 	void updateKeybind() ;
 	void updatePlayerPosition();
 	void updateBallPosition(const float& deltaTime);

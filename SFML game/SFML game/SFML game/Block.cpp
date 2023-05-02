@@ -38,30 +38,7 @@ void Block::render(sf::RenderTarget* target)
 {
 	target->draw(this->sprite);
 }
-/////////////////////////////////////////////////////////////////
-// Block Background
 
-void BlockBackground::initTexture()
-{
-	if (!this->texture.loadFromFile("Textures/background.png"))
-		std::cout << "ERROR::FAILED TO LOAD TEXTURE BLOCK\n";
-}
-void BlockBackground::initSprite()
-{
-	this->sprite.setTexture(this->texture);
-	sprite.scale(1.2f, 1.2f);
-	//sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
-}
-
-BlockBackground::BlockBackground()
-{
-
-	initTexture();
-	initSprite();
-	this->sprite.setPosition(pair.first, pair.second);
-	this->health = 3;
-
-}
 
 /////////////////////////////////////////////////////////////////
 // Block Yellow
@@ -110,11 +87,11 @@ BlockBlue::BlockBlue()
 {
 	counter++;
 	pair.first = 200;
-	pair.second = 200;
+	pair.second = 350;
 	pair = std::make_pair(pair.first *counter, pair.second *counter);
 	initTexture();
 	initSprite();
 	this->sprite.setPosition(pair.first, pair.second);
-	this->health = 2;
+	this->health = 30;
 
 }

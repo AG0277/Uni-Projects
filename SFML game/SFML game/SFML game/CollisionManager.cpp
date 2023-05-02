@@ -9,16 +9,7 @@ bool CollisionManager::handleCollisions(Ball& ball, Block& block, bool& changeX,
     float radius = ball.getSprite().getGlobalBounds().width / 2;
     if (block.getSprite()->getGlobalBounds().intersects(ball.getSprite().getGlobalBounds()))
     {
-        int y, y1, y2, y3, y4;
-        y = ball.getSprite().getPosition().y + radius;
-        y1 = block.getSpritePosition().at(1) + block.getSpritePosition().at(3);
-        y2 = ball.getSprite().getPosition().y - radius;
-        y3 = block.getSpritePosition().at(1);
-        int x, x1, x2, x3;
-        x = ball.getSprite().getPosition().x + radius;
-        x1 = block.getSpritePosition().at(0) + block.getSpritePosition().at(2);
-        x2 = ball.getSprite().getPosition().x - radius;
-        x3 = block.getSpritePosition().at(0);
+
         if (ball.getSprite().getPosition().y + radius >= block.getSpritePosition().at(1) + block.getSpritePosition().at(3) || ball.getSprite().getPosition().y - radius <= block.getSpritePosition().at(1))
         {
             changeY = true;
@@ -42,7 +33,7 @@ bool CollisionManager::handleCollisions(Ball& ball, Block& block, bool& changeX,
     return false;
 }
 
-bool CollisionManager::handleBackgroundCollisions(Ball& ball, sf::Sprite& worldbackground, bool& changeX, bool& changeY,bool& delBall)
+bool CollisionManager::handleBackground_BallCollisions(Ball& ball, sf::Sprite& worldbackground, bool& changeX, bool& changeY,bool& delBall)
 {
     bool checkX = false;
     bool checkY = false;
@@ -90,3 +81,16 @@ bool CollisionManager::handleBackgroundCollisions(Ball& ball, sf::Sprite& worldb
 
     return false;
 }
+
+bool CollisionManager::handleBackground_BlockCollisions(Block& block, sf::Sprite& worldbackground)
+{
+    int k = block.getSprite()->getGlobalBounds().top;
+    int h= block.getSprite()->getGlobalBounds().height;
+    int y = worldbackground.getGlobalBounds().top + worldbackground.getGlobalBounds().height;
+    if (block.getSprite()->getGlobalBounds().top + block.getSprite()->getGlobalBounds().height >= worldbackground.getGlobalBounds().top + worldbackground.getGlobalBounds().height)
+    {
+        return true;
+    }
+    return false;
+}
+

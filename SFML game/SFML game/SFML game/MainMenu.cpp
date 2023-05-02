@@ -10,7 +10,7 @@ void MainMenu::initBackground()
 	this->worldBackgroud.scale(1.2f, 1.2f);
 }
 
-MainMenu::MainMenu(sf::RenderWindow* window, sf::VideoMode videoMode):States(window,videoMode)
+MainMenu::MainMenu(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states):States(window,videoMode,states)
 {
 	this->initBackground();
 }
@@ -18,8 +18,14 @@ MainMenu::MainMenu(sf::RenderWindow* window, sf::VideoMode videoMode):States(win
 
 void MainMenu::updateKeybind()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-		this->endState();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			std::cout << "XD";
+			this->states->push(new GameState(this->window, this->videoMode, this->states));
+		}
+	
+
 }
 
 void MainMenu::update(const float& deltaTime)

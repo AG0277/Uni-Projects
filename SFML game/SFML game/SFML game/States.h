@@ -13,17 +13,17 @@ class States
 private:
 
 protected:
+	std::stack<States*>* states;
 	sf::VideoMode videoMode;
 	sf::RenderWindow* window;
-	std::vector<sf::Texture> textures;
 	CollisionManager collision;
 	bool quitState;
 	sf::Texture worldBackgroundTexture;
 	sf::Sprite worldBackgroud;
 
 public:
-	States(sf::RenderWindow* window, sf::VideoMode videoMode);
-	~States();
+	States(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states);
+	virtual ~States();
 
 
 	bool getQuit();
