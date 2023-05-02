@@ -7,6 +7,8 @@
 #include "Block.h"
 #include "CollisionManager.h"
 #include <map>
+#include "GUI.h"
+#include <stdlib.h>
 
 class States
 {
@@ -31,7 +33,7 @@ public:
 	//bool getQuitState() { return this->quitState; };
 	
 	virtual void updateKeybind() = 0;
-	virtual	void update(const float& deltaTime) = 0;
+	virtual	void update(const float& deltaTime, sf::Time& dt) = 0;
 	virtual void render(sf::RenderTarget* target) = 0;
 };
 

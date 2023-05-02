@@ -13,6 +13,7 @@ private:
 	sf::Clock dtClock;
 	float deltaTime;
 	sf::Event sfmlEvent;
+	sf::Time dt;
 
 	void initWindow();
 	void initStates();
@@ -24,7 +25,7 @@ public:
 	//Function
 	void updateDeltaTime();
 	const bool running() const;
-	void pollEvents();
-	void update();
+	bool pollEvents();
+	bool update();
 	void render();
 };

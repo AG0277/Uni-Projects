@@ -21,19 +21,24 @@ void MainMenu::updateKeybind()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			std::cout << "XD";
 			this->states->push(new GameState(this->window, this->videoMode, this->states));
+
 		}
 	
 
 }
 
-void MainMenu::update(const float& deltaTime)
+void MainMenu::update(const float& deltaTime, sf::Time& dt)
 {
 	updateKeybind();
+	ImGui::SFML::Update(*window, dt);
+	ImGui::Begin("Hello, world!");
+	ImGui::Button("Look at this pretty button");
+	ImGui::End();
 }
 
 void MainMenu::render(sf::RenderTarget* target)
 {
 	window->draw(this->worldBackgroud);
+	ImGui::SFML::Render(*window);
 }

@@ -1,7 +1,6 @@
 #include "GameState.h"
 
-//int GameState::ballsCounter = 0;
-//float GameState::dt = 0;
+
 
 void GameState::initBlocks()
 {
@@ -206,7 +205,7 @@ void GameState::collisionManager(const float& deltaTime)
 	}
 }
 
-void GameState::update(const float& deltaTime)
+void GameState::update(const float& deltaTime, sf::Time& dt)
 {
 	this->updateBlock();
 	this->collisionManager(deltaTime);
@@ -215,6 +214,10 @@ void GameState::update(const float& deltaTime)
 	this->updatePlayerPosition();
 	this->updateBallPosition(deltaTime);
 	this->updateFiredBalls(deltaTime);
+	ImGui::SFML::Update(*window, dt);
+	ImGui::Begin("Hello, world!");
+	ImGui::Button("Look at this pretty button");
+	ImGui::End();
 
 }
 
@@ -226,4 +229,6 @@ void GameState::render(sf::RenderTarget* target)
 		ball->render(this->window);
 	for (auto* block : block)
 		block->render(this->window);
+	ImGui::SFML::Render(*window);
+
 }

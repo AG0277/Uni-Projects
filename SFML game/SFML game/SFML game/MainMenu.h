@@ -12,7 +12,7 @@ public:
 	virtual ~MainMenu() {};
 
 	void updateKeybind();
-	void update(const float& deltaTime);
+	void update(const float& deltaTime, sf::Time& dt);
 	void render(sf::RenderTarget* target) ;
 };
 
