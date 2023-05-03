@@ -9,11 +9,14 @@ void Game::initWindow()
 	this->window = new sf::RenderWindow(videoMode, "Bricks Breaker", sf::Style::Titlebar | sf::Style::Close);
 	this->window->setVerticalSyncEnabled(false);
 	ImGui::SFML::Init(*window);
+
+
 	//this->window->setFramerateLimit(60);
 }
 
 void Game::initStates()
 {
+	//this->gui = new GUI(this->window);
 
 	this->states.push(new MainMenu(this->window, this->videoMode, &this->states));
 
@@ -80,6 +83,7 @@ bool Game::pollEvents()
 
 bool Game::update()
 {
+	static int j = 0;
 	if (this->pollEvents())
 	{
 		if (this->window->hasFocus())
@@ -87,6 +91,15 @@ bool Game::update()
 			if (!this->states.empty())
 			{
 				this->states.top()->update(this->deltaTime, this->dt);
+				if(j<=0)
+				{
+					ImVec2 buttonPos(this->window->getSize().x+200, this->window->getSize().y+200);
+					ImVec2 buttonPos1(0, 0);
+					ImGui::SetWindowPos(buttonPos1);
+					ImGui::SetNextWindowSize(buttonPos);
+				}
+				j++;
+				
 				if (this->states.top()->getQuit())
 				{
 					this->states.top()->endState();

@@ -22,6 +22,7 @@ protected:
 	bool quitState;
 	sf::Texture worldBackgroundTexture;
 	sf::Sprite worldBackgroud;
+	GUI* gui;
 
 public:
 	States(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states);

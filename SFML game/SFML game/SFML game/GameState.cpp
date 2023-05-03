@@ -215,9 +215,7 @@ void GameState::update(const float& deltaTime, sf::Time& dt)
 	this->updateBallPosition(deltaTime);
 	this->updateFiredBalls(deltaTime);
 	ImGui::SFML::Update(*window, dt);
-	ImGui::Begin("Hello, world!");
-	ImGui::Button("Look at this pretty button");
-	ImGui::End();
+	this->gui->createButton("abc",250,50,350,500);
 
 }
 

@@ -1,4 +1,7 @@
-﻿  imgui_demo.cpp
+﻿  GameState.cpp
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\GameState.cpp(137,13): warning C4244: "inicjowanie": konwersja z "unsigned int" do "float", możliwa utrata danych
   main.cpp
+  MainMenu.cpp
+  States.cpp
   Generowanie kodu...
-  SFML game.vcxproj -> C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe
+  SFML game.vcxproj -> C:\Users\ewagr\Source\Repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe

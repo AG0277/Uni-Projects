@@ -22,19 +22,16 @@ void MainMenu::updateKeybind()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			this->states->push(new GameState(this->window, this->videoMode, this->states));
-
 		}
-	
-
 }
 
 void MainMenu::update(const float& deltaTime, sf::Time& dt)
 {
+	
 	updateKeybind();
 	ImGui::SFML::Update(*window, dt);
-	ImGui::Begin("Hello, world!");
-	ImGui::Button("Look at this pretty button");
-	ImGui::End();
+	gui->createButton("abc", 150, 150, 200, 400);
+
 }
 
 void MainMenu::render(sf::RenderTarget* target)
