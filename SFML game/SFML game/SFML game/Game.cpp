@@ -11,15 +11,12 @@ void Game::initWindow()
 	ImGui::SFML::Init(*window);
 
 
-	//this->window->setFramerateLimit(60);
+	this->window->setFramerateLimit(120);
 }
 
 void Game::initStates()
 {
-	//this->gui = new GUI(this->window);
-
 	this->states.push(new MainMenu(this->window, this->videoMode, &this->states));
-
 }
 
 

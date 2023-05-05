@@ -4,34 +4,18 @@
 
 void GameState::initBlocks()
 {
-	//for (int i = 0; i < 13; i++)
-	
 		for (int j = 0; j < map.size(); j++)
 		{
-			for (int k = 0; k < 11; k++)
+			for (int k = 0; k < 13; k++)
 			{
 				if (map.at(j).at(k) == 'g')
 				{
 					this->block.push_back(new BlockYellow);
-					this->block.at(this->block.size() -1)->getSprite()->setPosition(this->block.at(0)->getSprite()->getGlobalBounds().width * k, this->block.at(0)->getSprite()->getGlobalBounds().height * j);
+					this->block.at(this->block.size() -1)->getSprite()->setPosition(this->block.at(0)->getSprite()->getGlobalBounds().width * k+12, this->block.at(0)->getSprite()->getGlobalBounds().height * j);
 					map.at(j).at(k) = ' ';
 				}
 			}
 		}
-		//this->block.push_back(new BlockYellow);
-		//this->block.at(i)->getSprite()->setPosition()
-		//if (i % 2 == 0)
-		//{
-		//	int k = 0;
-		//	this->block.push_back(new BlockYellow);
-		//}
-		//else
-		//{
-		//	int k = 0;
-		//	this->block.push_back(new BlockBlue);
-		//}
-			
-	
 }
 
 void GameState::initPlayer()
@@ -42,16 +26,17 @@ void GameState::initPlayer()
 void GameState::initBall()
 {	
 	this->ball.push_back(new Ball(videoMode,worldBackgroud));
-	ballsCounter++;
 }
 
 void GameState::initBackground()
 {
 
 	if (!this->worldBackgroundTexture.loadFromFile("Textures/background.png"))
-		std::cout << "ERROR::FAILED TO LOAD TEXTURE BLOCK\n";
+		std::cout << "ERROR::FAILED TO LOAD TEXTURE background\n";
 	this->worldBackgroud.setTexture(worldBackgroundTexture);
-	this->worldBackgroud.scale(1.2f, 1.2f);
+	if (!this->framebackgroundtex.loadFromFile("Textures/background1.png"))
+		std::cout << "ERROR::FAILED TO LOAD TEXTURE frame\n";
+	this->framebackground.setTexture(framebackgroundtex);
 }
 void GameState::initFont()
 {
@@ -66,7 +51,7 @@ GameState::GameState(sf::RenderWindow* window, sf::VideoMode videoMode,std::stac
 	map = {
 "#############",
 "#           #",
-"#g g ggggggg#",
+"gg g gggggggggg",
 "#  gg g     #",
 "# g  gg gg g#",
 "#           #",
@@ -75,7 +60,7 @@ GameState::GameState(sf::RenderWindow* window, sf::VideoMode videoMode,std::stac
 "#           #",
 "#           #",
 "#           #",
-"#           #",
+"#  g g      #",
 "#           #",
 "#           #",
 "#############",
@@ -86,7 +71,7 @@ GameState::GameState(sf::RenderWindow* window, sf::VideoMode videoMode,std::stac
 	initPlayer();
 	initBall();
 	initFont();
-	play = true;
+	colisionON = true;
 	canModify = true;
 
 }
@@ -105,20 +90,17 @@ void GameState::fireBalls(sf::Vector2i position)
 
 		this->ball.push_back(new Ball(videoMode,worldBackgroud));
 		ballsCounter++;
-		this->ball.at(ballsCounter-1)->directions(position.x, position.y);
+		ballsPushed++;
+		this->ball.at(ballsCounter - 1)->directions(position.x, position.y);
+
 }
 
 void GameState::changeGameBoard()
 {
-
-	if (this->ballsCounter <= 0 && play == false)
-	{
-		for (auto* block : block)
+	for (auto* block : block)
 		{
 			block->getSprite()->setPosition(block->getSprite()->getGlobalBounds().left, block->getSprite()->getGlobalBounds().top + block->getSprite()->getGlobalBounds().height);
 		}
-	}
-
 }
 
 void GameState::updateKeybind()
@@ -132,19 +114,18 @@ void GameState::updateKeybind()
 	{
 
 	}
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->play == true)
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) )
 		for (int i = 0; i < ball.size(); i++)
 		{
 			this->Ballposition = sf::Mouse::getPosition(*this->window);
 			this->ball.at(i)->directions(Ballposition.x, Ballposition.y);
 		}
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->play == true)
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)&& canModify == true)
 	{
 		Ballposition = sf::Mouse::getPosition(*this->window);
 		ball.erase(ball.begin());
-		ballsCounter--;
+		canModify = false;
 		fireBalls(Ballposition);
-		this->play = false;
 	}
 }
 
@@ -181,10 +162,9 @@ void GameState::updateFiredBalls(const float& deltaTime)
 	this->dt = (dt+temp) ;
 	if (dt > 100)
 	{
-		if (ballsCounter > 0 && ballsCounter < 30 && canModify == true&&play == false)
+		if (ballsPushed > 0 && ballsPushed < 30&& canModify==false )
 		{
-			if (ballsCounter == 29)
-				canModify = false;
+
 			fireBalls(Ballposition);
 		}
 		dt = 0;
@@ -195,38 +175,42 @@ void GameState::updateFiredBalls(const float& deltaTime)
 void GameState::collisionManager(const float& deltaTime)
 {
 	int counter = 0;
-
+	
 	for (auto ball:ball)
 	{
-
-		for (int j = 0; j < block.size(); j++)
-		{
-			bool changeX = false;
-			bool changeY = false;
-
-			if (this->collision.handleCollisions(*ball, *block.at(j), changeX, changeY))
+		bool doublecolision = false;
+		if (colisionON == true)
+			for (int j = 0; j < block.size(); j++)
 			{
-				ball->updateDirection(changeX, changeY);
-				block.at(j)->updateHit();
+				bool changeX = false;
+				bool changeY = false;
+				if (this->collision.handleCollisions(*ball, *block.at(j), changeX, changeY))
+				{
+					if (doublecolision == false)
+						ball->updateDirection(changeX, changeY);
+					block.at(j)->updateHit();
+					doublecolision = true;
+				}
 			}
-		}
 		bool changeX = false;
 		bool changeY = false;
 		bool delBall = false;
+		
 		if (this->collision.handleBackground_BallCollisions(*ball, worldBackgroud, changeX, changeY, delBall))
 		{
 			ball->updateDirection(changeX, changeY);
 			if (delBall == true)
 			{
 				this->ball.erase(this->ball.begin() + counter);
+				counter--;
 				ballsCounter--;
-				if (this->ball.size() == 0)
-				{ 
+				if (this->ball.size() == 0 && canModify == false)
+				{
 					changeGameBoard();
-					play = true;
-					this->ball.push_back(new Ball(videoMode,worldBackgroud));
-					ballsCounter++;
+					this->ball.push_back(new Ball(videoMode, worldBackgroud));
 					canModify = true;
+					ballsPushed = 0;
+					colisionON = true;
 				}
 			}
 		}
@@ -240,32 +224,38 @@ void GameState::collisionManager(const float& deltaTime)
 	{
 		if (collision.handleBackground_BlockCollisions(*block, worldBackgroud))
 		{
-
 			this->endState();
-			//std::cout <<deltaTime<< " XDDDDDDDDDDDDDDDDD";
-			//this->states->push(new MainMenu(this->window, this->videoMode, this->states));
 		}
 	}
 }
 
+void GameState::updateGUI()
+{
+	if (this->gui->createButton("PULL BALLS", 200, 100, 300, 797))\
+	{
+		colisionON = false;
+		for (int i = 0; i < ball.size(); i++)
+		{
+			ball.at(i)->directions(400, 800);
+		}
+	}
+}
 void GameState::update(const float& deltaTime, sf::Time& dt)
 {
 	this->collisionManager(deltaTime);
 	this->updateBlock();
-	this->player->update();
 	this->updateKeybind();
 	this->updatePlayerPosition();
 	this->updateBallPosition(deltaTime);
 	this->updateFiredBalls(deltaTime);
 	ImGui::SFML::Update(*window, dt);
-	//this->gui->createButton("abc",250,50,350,500);
-
+	this->updateGUI();
 }
 
 void GameState::render(sf::RenderTarget* target)
 {
 	window->draw(this->worldBackgroud);
-	this->player->render(this->window);
+	window->draw(this->framebackground);
 	for (auto* ball : ball)
 		ball->render(this->window);
 	for (auto* block : block)

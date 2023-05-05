@@ -11,12 +11,15 @@ private:
 	std::vector<Block*> block;
 	std::vector<Ball*> ball;
 	int ballsCounter;
+	int ballsPushed;
 	sf::Vector2i Ballposition;
 	float dt;
-	bool play;
+	bool colisionON;
 	bool canModify;
 	sf::Text text;
 	sf::Font font;
+	sf::Texture framebackgroundtex;
+	sf::Sprite framebackground;
 
 	std::vector<std::string> map;
 	// private initlializers
@@ -39,6 +42,7 @@ public:
 	void updateBallPosition(const float& deltaTime);
 	void updateBlock();
 	void updateFiredBalls(const float& deltaTime);
+	void updateGUI();
 	void update(const float& deltaTime, sf::Time& dt) ;
 
 	// render function

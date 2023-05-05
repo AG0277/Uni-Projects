@@ -238,6 +238,7 @@ bool GUI::createButton(const char* text, float x, float y, float posx, float pos
     window_flags |= ImGuiWindowFlags_NoMove;
     window_flags |= ImGuiWindowFlags_NoResize;
     window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
+    window_flags |= ImGuiWindowFlags_NoScrollbar;
 
     ImGui::Begin("Button", 0, window_flags);
     ImGui::SetCursorPos(buttonPos2);

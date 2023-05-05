@@ -8,19 +8,11 @@ void test2(sf::RenderWindow* window)
 void test()
 {
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(300, 200), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
-    sf::Font font;
-    if (!font.loadFromFile("font/arial.ttf"))
-        std::cout << "ERROR::FAILED TO LOAD TEXTURE BALL\n";
-    sf::Text text;
-    text.setFont(font);
-    int test = 50;
-    std::string stext = std::to_string(test);
-    text.setString( stext);
+    shape.setOrigin(shape.getGlobalBounds().width / 2, shape.getGlobalBounds().height / 2);
 
-   // text.setPosition(400, 300);
     while (window.isOpen())
     {
         sf::Event event;
@@ -31,10 +23,11 @@ void test()
         }
 
         window.clear();
-        window.draw(text);
+        window.draw(shape);
         window.display();
     }
-
+    std::cout << window.getSize().x << " " << window.getPosition().x;
+    //std::cout << shape.getPosition().x<< shape.getPosition().y;
 }
 
 int main()

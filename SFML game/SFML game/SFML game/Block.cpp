@@ -7,7 +7,7 @@ int BlockYellow::counter = 0;
 void Block::updateHit()
 {
 	this->health -= 1;
-	std::cout << health;
+	//std::cout << health;
 }
 
 std::vector<float> Block::getSpritePosition()

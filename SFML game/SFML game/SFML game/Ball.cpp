@@ -3,7 +3,7 @@
 void Ball::initSprite()
 {
 	this->sprite.setTexture(this->texture);
-	sprite.scale(0.03f, 0.03f);
+	sprite.scale(0.02f, 0.02f);
 	sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
 }
 void Ball::initTexture()
@@ -16,7 +16,7 @@ Ball::Ball(sf::VideoMode videoMode, sf::Sprite& background)
 {
 	initTexture();
 	initSprite();
-	this->sprite.setPosition(videoMode.width / 2 , videoMode.height*0.98);
+	this->sprite.setPosition(videoMode.width / 2 , videoMode.height*0.98-100);
 	this->speed = videoMode.width/100;
 }
 
