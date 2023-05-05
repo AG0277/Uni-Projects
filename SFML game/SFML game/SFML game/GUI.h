@@ -17,7 +17,7 @@ private:
 
 public:
 	GUI(sf::Window* window);
-	void createButton(const char* text, float x, float y, float posx, float posy);
+	bool createButton(const char* text, float x, float y, float posx, float posy);
 	void loginmenu();
 };
 

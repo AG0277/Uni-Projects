@@ -4,19 +4,34 @@
 
 void GameState::initBlocks()
 {
-	for (int i = 0; i < 4; i++)
-	{
-		if (i % 2 == 0)
+	//for (int i = 0; i < 13; i++)
+	
+		for (int j = 0; j < map.size(); j++)
 		{
-			int k = 0;
-			this->block.push_back(new BlockYellow);
+			for (int k = 0; k < 11; k++)
+			{
+				if (map.at(j).at(k) == 'g')
+				{
+					this->block.push_back(new BlockYellow);
+					this->block.at(this->block.size() -1)->getSprite()->setPosition(this->block.at(0)->getSprite()->getGlobalBounds().width * k, this->block.at(0)->getSprite()->getGlobalBounds().height * j);
+					map.at(j).at(k) = ' ';
+				}
+			}
 		}
-		else
-		{
-			int k = 0;
-			this->block.push_back(new BlockBlue);
-		}
-	}
+		//this->block.push_back(new BlockYellow);
+		//this->block.at(i)->getSprite()->setPosition()
+		//if (i % 2 == 0)
+		//{
+		//	int k = 0;
+		//	this->block.push_back(new BlockYellow);
+		//}
+		//else
+		//{
+		//	int k = 0;
+		//	this->block.push_back(new BlockBlue);
+		//}
+			
+	
 }
 
 void GameState::initPlayer()
@@ -38,15 +53,39 @@ void GameState::initBackground()
 	this->worldBackgroud.setTexture(worldBackgroundTexture);
 	this->worldBackgroud.scale(1.2f, 1.2f);
 }
+void GameState::initFont()
+{
+	if (!font.loadFromFile("font/arial.ttf"))
+		std::cout << "ERROR::FAILED TO LOAD FONT\n";
+	text.setFont(font);
+}
 
 GameState::GameState(sf::RenderWindow* window, sf::VideoMode videoMode,std::stack<States*>* states)
 	:States(window,videoMode,states)
 {
+	map = {
+"#############",
+"#           #",
+"#g g ggggggg#",
+"#  gg g     #",
+"# g  gg gg g#",
+"#           #",
+"#           #",
+"#           #",
+"#           #",
+"#           #",
+"#           #",
+"#           #",
+"#           #",
+"#           #",
+"#############",
+	};
 	initBlocks();
 	collision = CollisionManager();
 	initBackground();
 	initPlayer();
 	initBall();
+	initFont();
 	play = true;
 	canModify = true;
 
@@ -89,6 +128,10 @@ void GameState::updateKeybind()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		this->player->move(1, 0);
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+
+	}
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->play == true)
 		for (int i = 0; i < ball.size(); i++)
 		{
@@ -207,15 +250,15 @@ void GameState::collisionManager(const float& deltaTime)
 
 void GameState::update(const float& deltaTime, sf::Time& dt)
 {
-	this->updateBlock();
 	this->collisionManager(deltaTime);
+	this->updateBlock();
 	this->player->update();
 	this->updateKeybind();
 	this->updatePlayerPosition();
 	this->updateBallPosition(deltaTime);
 	this->updateFiredBalls(deltaTime);
 	ImGui::SFML::Update(*window, dt);
-	this->gui->createButton("abc",250,50,350,500);
+	//this->gui->createButton("abc",250,50,350,500);
 
 }
 
@@ -226,7 +269,13 @@ void GameState::render(sf::RenderTarget* target)
 	for (auto* ball : ball)
 		ball->render(this->window);
 	for (auto* block : block)
+	{
 		block->render(this->window);
+		text.setString(std::to_string(block->getHealth()));
+		text.setPosition(block->getSprite()->getGlobalBounds().left+ block->getSprite()->getGlobalBounds().width/4, block->getSprite()->getGlobalBounds().top+ block->getSprite()->getGlobalBounds().height/4);
+		window->draw(text);
+			
+	}
 	ImGui::SFML::Render(*window);
 
 }

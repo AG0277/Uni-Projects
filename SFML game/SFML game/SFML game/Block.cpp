@@ -58,14 +58,14 @@ void BlockYellow::initSprite()
 
 BlockYellow::BlockYellow()
 {
-	counter++;
-	pair.first = 20;
-	pair.second = 50;
-	pair = std::make_pair(pair.first * counter, pair.second * counter);
 	initTexture();
 	initSprite();
-	this->sprite.setPosition(pair.first, pair.second);
-	this->health = 3;
+	pair.first = 0;
+	pair.second = 100;
+	pair = std::make_pair(pair.first + this->sprite.getGlobalBounds().width * counter, pair.second );
+	counter++;
+	//this->sprite.setPosition(pair.first, pair.second);
+	this->health = 80;
 
 }
 /////////////////////////////////////////////////////////////////

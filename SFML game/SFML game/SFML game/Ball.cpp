@@ -16,8 +16,7 @@ Ball::Ball(sf::VideoMode videoMode, sf::Sprite& background)
 {
 	initTexture();
 	initSprite();
-
-	this->sprite.setPosition(background.getGlobalBounds().width / 2 , background.getGlobalBounds().height*0.98);
+	this->sprite.setPosition(videoMode.width / 2 , videoMode.height*0.98);
 	this->speed = videoMode.width/100;
 }
 

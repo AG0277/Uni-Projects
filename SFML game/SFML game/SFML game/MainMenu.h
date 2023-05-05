@@ -14,6 +14,7 @@ public:
 	void updateKeybind();
 	void update(const float& deltaTime, sf::Time& dt);
 	void render(sf::RenderTarget* target);
+	void imgui();
 };
 
 

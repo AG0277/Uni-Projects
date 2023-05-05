@@ -1,6 +1,7 @@
 #pragma once
 #include"States.h"
 #include "MainMenu.h"
+#include <unordered_map>
 
 class GameState :public States
 {
@@ -14,12 +15,16 @@ private:
 	float dt;
 	bool play;
 	bool canModify;
+	sf::Text text;
+	sf::Font font;
 
+	std::vector<std::string> map;
 	// private initlializers
 	void initBlocks();
 	void initPlayer();
 	void initBall();
 	void initBackground();
+	void initFont();
 
 public:
 	GameState(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states) ;

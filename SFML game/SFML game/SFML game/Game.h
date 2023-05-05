@@ -15,6 +15,7 @@ private:
 	sf::Event sfmlEvent;
 	sf::Time dt;
 
+
 	void initWindow();
 	void initStates();
 

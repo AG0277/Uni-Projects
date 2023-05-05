@@ -25,12 +25,28 @@ void MainMenu::updateKeybind()
 		}
 }
 
+void MainMenu::imgui()
+{
+	float x = this->window->getSize().x / 2;
+	float y = this->window->getSize().y *3/5;
+	int buttonx = 250;
+	int buttony = 50;
+	if (gui->createButton("New Game", buttonx, buttony, x - buttonx / 2, y))
+	{
+		this->states->push(new GameState(this->window, this->videoMode, this->states));
+	}
+	gui->createButton("Leaderboard", buttonx, buttony, x - buttonx / 2, y + buttony);
+	if (gui->createButton("Exit", buttonx, buttony, x - buttonx / 2, y + buttony * 2))
+		endState();
+}
 void MainMenu::update(const float& deltaTime, sf::Time& dt)
 {
 	
 	updateKeybind();
 	ImGui::SFML::Update(*window, dt);
-	gui->createButton("abc", 150, 150, 200, 400);
+	imgui();
+
+
 
 }
 

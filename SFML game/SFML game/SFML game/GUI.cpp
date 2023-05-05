@@ -227,7 +227,7 @@ void GUI::loginmenu()
     //    ImGui::End();
   
 }
-void GUI::createButton(const char* text, float x, float y, float posx, float posy)
+bool GUI::createButton(const char* text, float x, float y, float posx, float posy)
 {
     buttonSize.x = x;
     buttonSize.y = y;
@@ -241,6 +241,11 @@ void GUI::createButton(const char* text, float x, float y, float posx, float pos
 
     ImGui::Begin("Button", 0, window_flags);
     ImGui::SetCursorPos(buttonPos2);
-    ImGui::Button(text,buttonSize);
+    if (ImGui::Button(text, buttonSize))
+    {
+        ImGui::End();
+        return true;
+    }
     ImGui::End();
+    return false;
 }
