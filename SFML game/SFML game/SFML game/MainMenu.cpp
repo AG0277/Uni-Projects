@@ -16,14 +16,6 @@ MainMenu::MainMenu(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack
 }
 
 
-void MainMenu::updateKeybind()
-{
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			this->states->push(new GameState(this->window, this->videoMode, this->states));
-		}
-}
 
 void MainMenu::imgui()
 {
@@ -41,13 +33,9 @@ void MainMenu::imgui()
 }
 void MainMenu::update(const float& deltaTime, sf::Time& dt)
 {
-	
-	updateKeybind();
+
 	ImGui::SFML::Update(*window, dt);
 	imgui();
-
-
-
 }
 
 void MainMenu::render(sf::RenderTarget* target)

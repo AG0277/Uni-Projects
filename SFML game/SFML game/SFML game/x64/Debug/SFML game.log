@@ -1,13 +1,5 @@
-﻿  Game.cpp
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Game.cpp(93,82): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Game.cpp(93,49): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\Game.cpp(112): warning C4715: "Game::update”: niewszystkie ścieżki kodu zwracają wartość
+﻿  GameState.cpp
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\GameState.cpp(162,46): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\GameState.cpp(167,24): warning C4244: "argument": konwersja z "float" do "const unsigned __int64", możliwa utrata danych
+C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\SFML game\GameState.cpp(241,13): warning C4244: "inicjowanie": konwersja z "unsigned int" do "float", możliwa utrata danych
   SFML game.vcxproj -> C:\Users\ewagr\source\repos\Uni-Projects\SFML game\SFML game\x64\Debug\SFML game.exe

@@ -9,6 +9,7 @@ void Game::initWindow()
 	this->window = new sf::RenderWindow(videoMode, "Bricks Breaker", sf::Style::Titlebar | sf::Style::Close);
 	this->window->setVerticalSyncEnabled(false);
 	ImGui::SFML::Init(*window);
+	window->setKeyRepeatEnabled(false);
 
 
 	this->window->setFramerateLimit(120);
@@ -65,15 +66,21 @@ bool Game::pollEvents()
 			ImGui::SFML::Shutdown();
 			exit(EXIT_SUCCESS);
 		}
-		if (sfmlEvent.type == sf::Event::KeyPressed && sfmlEvent.key.code == sf::Keyboard::Escape)
-		{
-			int x = 5;
-			this->window->close();
-			ImGui::SFML::Shutdown();
-			exit(EXIT_SUCCESS);
-		}
-		//if (sfmlEvent.type == sf::Event::KeyPressed && sfmlEvent.key.code == sf::Keyboard::Enter)
-		//	this->states.push(new GameState(this->window, this->videoMode, &this->states));
+		
+		this->states.top()->setEvent(sfmlEvent);
+		//if (sfmlEvent.type == sf::Event::KeyPressed)
+		//{
+		//	this->states.top()->setEvent(sfmlEvent);
+		//	//states.push(new PauseGameState(window, videoMode, &states));
+		//	//int x = 5;
+		//	//this->window->close();
+		//	//ImGui::SFML::Shutdown();
+		//	//exit(EXIT_SUCCESS);
+		//}
+		//if (sfmlEvent.type == sf::Event::mou)
+		//{
+		//	this->states.top()->setEvent(sfmlEvent);
+		//}
 	}
 	return true;
 }

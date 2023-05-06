@@ -28,12 +28,9 @@ public:
 	States(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states);
 	virtual ~States();
 
-
+	virtual void setEvent(sf::Event& event) {};
 	bool getQuit();
 	void endState() { this->quitState = true; };
-	//bool getQuitState() { return this->quitState; };
-	
-	virtual void updateKeybind() = 0;
 	virtual	void update(const float& deltaTime, sf::Time& dt) = 0;
 	virtual void render(sf::RenderTarget* target) = 0;
 };

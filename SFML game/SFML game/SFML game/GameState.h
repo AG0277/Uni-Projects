@@ -2,7 +2,22 @@
 #include"States.h"
 #include "MainMenu.h"
 #include <unordered_map>
+#include <algorithm>
+#include <random>
+#include <numeric>
+#include "PauseGameState.h"
+struct Map
+{
+	std::vector<std::string> pyramid;
+	std::vector<std::string> kite;
+	std::vector<std::string> labirynth;
+	std::vector<std::string> random;
+	std::vector<std::vector<std::string>*> map;
+	int random_number;
+	float numberOfBlocksSpawned;
+	Map();
 
+};
 class GameState :public States
 {
 private:
@@ -20,6 +35,7 @@ private:
 	sf::Font font;
 	sf::Texture framebackgroundtex;
 	sf::Sprite framebackground;
+	float numberOfBlocksSpawned;
 
 	std::vector<std::string> map;
 	// private initlializers
@@ -35,9 +51,11 @@ public:
 
 	void fireBalls(sf::Vector2i position);
 	// update functions
+	void setEvent(sf::Event& event);
+	std::vector<int>  randomNumbers();
+	void addBlocks();
 	void changeGameBoard();
 	void collisionManager(const float& deltaTime);
-	void updateKeybind() ;
 	void updatePlayerPosition();
 	void updateBallPosition(const float& deltaTime);
 	void updateBlock();

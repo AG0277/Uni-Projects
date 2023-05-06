@@ -11,7 +11,6 @@ public:
 	MainMenu(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states);
 	virtual ~MainMenu() {};
 
-	void updateKeybind();
 	void update(const float& deltaTime, sf::Time& dt);
 	void render(sf::RenderTarget* target);
 	void imgui();

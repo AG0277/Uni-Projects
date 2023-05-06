@@ -17,7 +17,10 @@ GUI::GUI(sf::Window* window)
 void GUI::loginmenu()
 {
 
-    ImGui::Begin("##LogIn");
+    ImGuiWindowFlags window_flags = 0;
+    window_flags |= ImGuiWindowFlags_NoBackground;
+    window_flags |= ImGuiWindowFlags_NoTitleBar;
+    ImGui::Begin("##LogIn",0,window_flags);
     int windowx = ImGui::GetWindowWidth();
     int windowy = ImGui::GetWindowHeight();
     ImVec2 middle(windowx / 3, windowy / 2);
