@@ -32,3 +32,6 @@
 # Visual Studio
 *.vs
 *.pdb
+*.tlog
+*.log
+*.ilk
