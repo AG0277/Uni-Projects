@@ -7,7 +7,7 @@ int BlockYellow::counter = 0;
 void Block::updateHit()
 {
 	this->health -= 1;
-	//std::cout << health;
+	setColor();
 }
 
 std::vector<float> Block::getSpritePosition()
@@ -39,24 +39,38 @@ void Block::render(sf::RenderTarget* target)
 	target->draw(this->sprite);
 }
 
+void Block::setColor() 
+{
+	if (this->health < 20)
+		this->sprite.setColor(sf::Color(0, 250, 0, 255));
+	else if (this->health >= 20 && this->health < 40)
+		this->sprite.setColor(sf::Color(250, 0, 0, 255));
+	else if (this->health >= 40 && this->health < 60)
+		this->sprite.setColor(sf::Color(0, 0, 250, 255));
+	else if (this->health >= 60 && this->health < 80)
+		this->sprite.setColor(sf::Color(211, 37, 255, 255));
+	else if (this->health >= 80 && this->health < 100)
+		this->sprite.setColor(sf::Color(100, 37, 100, 255));
+}
 
 /////////////////////////////////////////////////////////////////
 // Block Yellow
 
 void BlockYellow::initTexture()
 {
-	if (!this->texture.loadFromFile("Textures/block.png"))
+	if (!this->texture.loadFromFile("Textures/Grey200.png"))
 		std::cout << "ERROR::FAILED TO LOAD TEXTURE BLOCK\n";
 }
 void BlockYellow::initSprite()
 {
 	this->sprite.setTexture(this->texture);
 	sprite.scale(0.4f, 0.4f);
-	this->sprite.setColor(sf::Color::Yellow);
+	//this->sprite.setColor(sf::Color::Yellow);
 	//sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
 }
 
 BlockYellow::BlockYellow()
+	:Block()
 {
 	initTexture();
 	initSprite();
@@ -84,6 +98,7 @@ void BlockBlue::initSprite()
 }
 
 BlockBlue::BlockBlue()
+	:Block()
 {
 	counter++;
 	pair.first = 200;

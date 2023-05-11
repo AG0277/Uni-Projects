@@ -62,7 +62,7 @@ Map::Map()
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> distr(0, 3);
-	random_number = distr(gen);
+	random_number = 3;// distr(gen);
 	if (random_number == 3)
 	{
 		std::string temp= "               ";
@@ -77,6 +77,14 @@ Map::Map()
 	map.push_back(&kite);
 	map.push_back(&labirynth);
 	map.push_back(&random);
+}
+
+int GameState::generateNumber()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(0, 2);
+	 return distr(gen);
 }
 
 void GameState::initBlocks()
@@ -194,12 +202,12 @@ void GameState::setEvent(sf::Event& event)
 	{
 		this->states->push(new PauseGameState(window, videoMode, states));
 	}
-	//if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-	//	for (int i = 0; i < ball.size(); i++)
-	//	{
-	//		this->Ballposition = sf::Mouse::getPosition(*this->window);
-	//		this->ball.at(i)->directions(Ballposition.x, Ballposition.y);
-	//	}
+	if (event.type == event.MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && canModify == true)
+	{
+		sf::Mouse::getPosition(*this->window);
+	
+
+	}
 	if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && canModify == true)
 	{
 		Ballposition = sf::Mouse::getPosition(*this->window);
@@ -345,6 +353,8 @@ void GameState::render(sf::RenderTarget* target)
 		window->draw(text);
 			
 	}
+	raytracing.render(this->window);
+
 	ImGui::SFML::Render(*window);
 
 }

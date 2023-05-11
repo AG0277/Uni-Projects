@@ -6,6 +6,8 @@
 #include <random>
 #include <numeric>
 #include "PauseGameState.h"
+#include "RayTracing.h"
+
 struct Map
 {
 	std::vector<std::string> pyramid;
@@ -18,6 +20,7 @@ struct Map
 	Map();
 
 };
+
 class GameState :public States
 {
 private:
@@ -36,9 +39,11 @@ private:
 	sf::Texture framebackgroundtex;
 	sf::Sprite framebackground;
 	float numberOfBlocksSpawned;
+	RayTracing raytracing;
 
 	std::vector<std::string> map;
 	// private initlializers
+
 	void initBlocks();
 	void initPlayer();
 	void initBall();
@@ -53,6 +58,7 @@ public:
 	// update functions
 	void setEvent(sf::Event& event);
 	std::vector<int>  randomNumbers();
+	int generateNumber();
 	void addBlocks();
 	void changeGameBoard();
 	void collisionManager(const float& deltaTime);

@@ -16,6 +16,7 @@ protected:
 	virtual void initSprite() = 0;
 	virtual void initTexture() = 0;
 public:
+	Block() { setColor(); };
 	virtual ~Block() { };
 	virtual std::vector<float> getSpritePosition();
 	virtual bool update();
@@ -23,6 +24,7 @@ public:
 	virtual void render(sf::RenderTarget* target);
 	virtual sf::Sprite* getSprite() { return &(this->sprite); };
 	virtual int getHealth() { return this->health; };
+	virtual void setColor();
 
 };
 
