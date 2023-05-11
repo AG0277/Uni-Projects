@@ -28,6 +28,7 @@ void test()
     }
     std::cout << window.getSize().x << " " << window.getPosition().x;
     //std::cout << shape.getPosition().x<< shape.getPosition().y;
+    //std::cout << shape.getPosition().x<< shape.getPosition().y
 }
 
 int main()
