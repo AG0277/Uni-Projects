@@ -15,7 +15,7 @@ private:
 	void initSprite();
 	void initTexture();
 public:
-	Ball(sf::VideoMode videoMode, sf::Sprite& background);
+	Ball(sf::VideoMode videoMode, sf::Vector2i newPos);
 	~Ball();
 
 	sf::Sprite getSprite() { return this->sprite; };

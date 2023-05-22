@@ -109,7 +109,9 @@ void GameState::initPlayer()
 
 void GameState::initBall()
 {	
-	this->ball.push_back(new Ball(videoMode,worldBackgroud));
+	currentBallPos.x = videoMode.width / 2;
+	currentBallPos.y = videoMode.height * 0.98 - 100;
+	this->ball.push_back(new Ball(videoMode, currentBallPos));
 }
 
 void GameState::initBackground()
@@ -155,12 +157,12 @@ GameState::~GameState()
 }
 
 
-void GameState::fireBalls(sf::Vector2i position)
+void GameState::fireBalls()
 {
-		this->ball.push_back(new Ball(videoMode,worldBackgroud));
+		this->ball.push_back(new Ball(videoMode,currentBallPos));
 		ballsCounter++;
 		ballsPushed++;
-		this->ball.at(ballsCounter - 1)->directions(position.x, position.y);
+		this->ball.at(ballsCounter - 1)->directions(mousePos.x, mousePos.y);
 
 }
 
@@ -210,10 +212,10 @@ void GameState::setEvent(sf::Event& event)
 	}
 	if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && canModify == true)
 	{
-		Ballposition = sf::Mouse::getPosition(*this->window);
+		mousePos = sf::Mouse::getPosition(*this->window);
 		ball.erase(ball.begin());
 		canModify = false;
-		fireBalls(Ballposition);
+		fireBalls();
 	}
 }
 
@@ -253,7 +255,7 @@ void GameState::updateFiredBalls(const float& deltaTime)
 		if (ballsPushed > 0 && ballsPushed < 30&& canModify==false )
 		{
 
-			fireBalls(Ballposition);
+			fireBalls();
 		}
 		dt = 0;
 	}
@@ -262,7 +264,8 @@ void GameState::updateFiredBalls(const float& deltaTime)
 void GameState::collisionManager(const float& deltaTime)
 {
 	int counter = 0;
-	
+	bool newPos = false;
+
 	for (auto ball:ball)
 	{
 		bool doublecolision = false;
@@ -282,9 +285,15 @@ void GameState::collisionManager(const float& deltaTime)
 		bool changeX = false;
 		bool changeY = false;
 		bool delBall = false;
-		
-		if (this->collision.handleBackground_BallCollisions(*ball, worldBackgroud, changeX, changeY, delBall))
+		if (this->collision.handleBackground_BallCollisions(*ball, worldBackgroud, changeX, changeY, delBall,newPos))
 		{
+			if (newPos == true)
+			{
+				this->NewBallPosition.x= (int)ball->getSprite().getPosition().x;
+				this->NewBallPosition.y = (int)ball->getSprite().getPosition().y-10;
+
+				newPos = false;
+			}
 			ball->updateDirection(changeX, changeY);
 			if (delBall == true)
 			{
@@ -294,10 +303,12 @@ void GameState::collisionManager(const float& deltaTime)
 				if (this->ball.size() == 0 && canModify == false)
 				{
 					changeGameBoard();
-					this->ball.push_back(new Ball(videoMode, worldBackgroud));
+					this->currentBallPos = NewBallPosition;
+					this->ball.push_back(new Ball(videoMode, NewBallPosition));
 					canModify = true;
 					ballsPushed = 0;
 					colisionON = true;
+					collision.setnewPos();
 				}
 			}
 		}

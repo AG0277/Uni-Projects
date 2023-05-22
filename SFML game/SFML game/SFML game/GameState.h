@@ -30,7 +30,8 @@ private:
 	std::vector<Ball*> ball;
 	int ballsCounter;
 	int ballsPushed;
-	sf::Vector2i Ballposition;
+	sf::Vector2i currentBallPos;
+	sf::Vector2i mousePos;
 	float dt;
 	bool colisionON;
 	bool canModify;
@@ -40,7 +41,7 @@ private:
 	sf::Sprite framebackground;
 	float numberOfBlocksSpawned;
 	RayTracing raytracing;
-
+	sf::Vector2i NewBallPosition;
 	std::vector<std::string> map;
 	// private initlializers
 
@@ -54,7 +55,7 @@ public:
 	GameState(sf::RenderWindow* window, sf::VideoMode videoMode, std::stack<States*>* states) ;
 	virtual ~GameState() ;
 
-	void fireBalls(sf::Vector2i position);
+	void fireBalls();
 	// update functions
 	void setEvent(sf::Event& event);
 	std::vector<int>  randomNumbers();
