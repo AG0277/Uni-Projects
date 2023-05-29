@@ -206,12 +206,13 @@ void GameState::setEvent(sf::Event& event)
 	}
 	if (event.type == event.MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && canModify == true)
 	{
-		sf::Mouse::getPosition(*this->window);
-	
+		raytracing.setTurnOn(true);
+		//raytracing.direction(sf::Mouse::getPosition(*this->window),currentBallPos);
 
 	}
 	if (event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && canModify == true)
 	{
+		raytracing.setTurnOn(false);
 		mousePos = sf::Mouse::getPosition(*this->window);
 		ball.erase(ball.begin());
 		canModify = false;
@@ -348,6 +349,8 @@ void GameState::update(const float& deltaTime, sf::Time& dt)
 	this->updatePlayerPosition();
 	this->updateBallPosition(deltaTime);
 	this->updateFiredBalls(deltaTime);
+	if (raytracing.getTurnOn() == true)
+		this->raytracing.update(sf::Mouse::getPosition(*this->window), currentBallPos);
 }
 
 void GameState::render(sf::RenderTarget* target)
